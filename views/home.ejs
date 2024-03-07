@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url-Shortner</title>
+</head>
+<body>
+    <div>
+        <h1>Url-Shortner</h1>
+        <p>Made with 💖 & 🧠</p>
+    </div>
+    <hr>
+    <% if(locals.shortUrl) {%>
+        <p>short url generated : <%=shortUrl%></p>
+    <%}%>
+    <hr>
+    <div>
+        <form action="/shortner" method="post">
+            <label for="url">Enter a original Url</label>
+            <br>
+            <input type="url" name="url">
+            <br>
+            <button type="submit">Shorten 🔗</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2>Shortened Urls</h2>
+        <% if(locals.urls) {%>
+            <table>
+                <thead>
+                    <th>Sl.no</th>
+                    <th>Short Url</th>
+                    <th>Original Url</th>
+                    <th>Total Visits</th>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => {%>
+                        <tr>
+                            <td><%=index+1%></td>
+                            <td><a href="<%=url.shortUrl%>" target="_blank"><%=url.shortUrl%></a></td>
+                            <td><a href="<%=url.originalUrl%>" target="_blank"><%=url.originalUrl%></a></td>
+                            <td><%=url.visits.length%></td>
+                        </tr>
+                    <%})%>
+                </tbody>
+            </table>
+        <% } %>    
+    </div>
+    
+</body>
+</html>
